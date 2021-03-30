@@ -149,25 +149,17 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Theme.of(context).accentColor,
-              Theme.of(context).primaryColor, // context is a good way 
-              // to pass around common data of app
-            ]
-          )
+          color: Theme.of(context).primaryColor,
         ),
         alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text('Rendezvous', 
+            Text('NCAA PRs', 
               style: TextStyle(
-                fontFamily: 'Signatra',
-                fontSize: 100.0,
+                fontFamily: 'Raleway',
+                fontSize: 75.0,
                 color: Colors.white,
               )
             ),

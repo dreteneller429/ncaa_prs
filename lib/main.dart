@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
       title: 'NCAA PRs',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.blue[900],
-        accentColor: Colors.pink,
+        primaryColor: Colors.black,
+        accentColor: Colors.amber,
       ),
       home: Home(),
     );
