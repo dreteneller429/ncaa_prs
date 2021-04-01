@@ -36,11 +36,11 @@ class _HomeState extends State<Home> {
       print('Error signing in: $err');
     });
     // Reauthenticate user when app is opened
-    // googleSignIn.signInSilently(suppressErrors: false).then((account) {
-    //     handleSignIn(account);
-    //   }).catchError((err) {
-    //     print('Error signing in: $err');
-    //   });
+    googleSignIn.signInSilently(suppressErrors: false).then((account) {
+        handleSignIn(account);
+      }).catchError((err) {
+        print('Error signing in: $err');
+      });
   }
 
   void handleSignIn(GoogleSignInAccount account) {
@@ -135,11 +135,11 @@ class _HomeState extends State<Home> {
         onTap: onTap,
         activeColor: Theme.of(context).primaryColor,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.whatshot),),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications_active),),
-          BottomNavigationBarItem(icon: Icon(Icons.person_pin_circle_outlined, size: 40.0),),
+          BottomNavigationBarItem(icon: Icon(Icons.whatshot_outlined),),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications_active_outlined),),
+          BottomNavigationBarItem(icon: Icon(Icons.run_circle_outlined, size: 40.0),),
           BottomNavigationBarItem(icon: Icon(Icons.search),),
-          BottomNavigationBarItem(icon: Icon(Icons.account_circle),),
+          BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined),),
         ],
       ),
     );

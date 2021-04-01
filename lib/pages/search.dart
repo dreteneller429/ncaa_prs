@@ -36,10 +36,10 @@ class _SearchState extends State<Search> {
       title: TextFormField(
         controller: searchController,
         decoration: InputDecoration(
-          hintText: 'Search for a user...',
+          hintText: 'Search for an athlete...',
           filled: true,
           prefixIcon: Icon(
-            Icons.account_box,
+            Icons.run_circle_outlined,
             size: 28.0,
           ),
           suffixIcon: IconButton(
@@ -53,17 +53,17 @@ class _SearchState extends State<Search> {
   }
 
   Container buildNoContent() {
-    final orientation = MediaQuery.of(context).orientation;
+    //final orientation = MediaQuery.of(context).orientation;
     return Container(
       child: Center(
         child: ListView(
           shrinkWrap: true,
           children: <Widget>[
-            SvgPicture.asset(
-              'assets/images/search.svg', 
-              height: orientation == Orientation.portrait ? 300.0 : 200.0,
-            ),
-            Text('Find Users', textAlign: TextAlign.center, style: 
+            // SvgPicture.asset(
+            //   'assets/images/search.svg', 
+            //   height: orientation == Orientation.portrait ? 300.0 : 200.0,
+            // ),
+            Text('Find Athletes', textAlign: TextAlign.center, style: 
             TextStyle(
               color: Colors.white, 
               fontStyle: FontStyle.italic,

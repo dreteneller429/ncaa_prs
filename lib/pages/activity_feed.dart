@@ -8,7 +8,13 @@ class ActivityFeed extends StatefulWidget {
 class _ActivityFeedState extends State<ActivityFeed> {
   @override
   Widget build(BuildContext context) {
-    return Text('Activity Feed');
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Activity Feed'),
+          backgroundColor: Theme.of(context).primaryColor,
+        ),
+        body: Text('Hello World')
+      );
   }
 }
 

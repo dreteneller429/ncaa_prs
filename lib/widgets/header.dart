@@ -5,11 +5,11 @@ AppBar header(context, { bool isAppTitle = false, String titleText = '',
   return AppBar(
     automaticallyImplyLeading: removeBackButton ? false : true,
     title: Text(
-      isAppTitle ? 'Rendezvous' : titleText,
+      isAppTitle ? 'NCAA PRs' : titleText,
       style: TextStyle(
         color: Colors.white,
-        fontFamily: isAppTitle ? 'Signatra' : '',
-        fontSize: isAppTitle ? 50.0 : 22.0,
+        fontFamily: isAppTitle ? 'Raleway' : '',
+        fontSize: isAppTitle ? 40.0 : 20.0,
       ),
     ),
     centerTitle: true,

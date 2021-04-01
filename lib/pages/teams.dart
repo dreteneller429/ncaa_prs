@@ -6,17 +6,14 @@ class Teams extends StatefulWidget {
 }
 
 class _TeamsState extends State<Teams> {
-
     @override
     Widget build(BuildContext context) {
-      return MaterialApp(
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Teams'),
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
-          body: Text('Hello World')
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Teams'),
+          backgroundColor: Theme.of(context).primaryColor,
         ),
+        body: Text('Hello World')
       );
     }
 }
