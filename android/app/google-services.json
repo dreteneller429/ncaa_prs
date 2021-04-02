@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "426907820573",
+    "project_id": "ncaa-prs",
+    "storage_bucket": "ncaa-prs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426907820573:android:469cea3e9fe18ac22a9cf4",
+        "android_client_info": {
+          "package_name": "com.davidreteneller.ncaaprs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426907820573-jci1s9lk93ikpeels0qnfk0n1fideuao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1YRA2Sx5Bttgzyz-cpai6RwUT4TAPaPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426907820573-jci1s9lk93ikpeels0qnfk0n1fideuao.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "426907820573-rkc7vd0pkif12u8v16ot59vdjm6lc2v5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.davidreteneller.ncaa-prs"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
