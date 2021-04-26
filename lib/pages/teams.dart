@@ -1,5 +1,6 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class Teams extends StatefulWidget {
   @override
@@ -7,8 +8,10 @@ class Teams extends StatefulWidget {
 }
 
 class _TeamsState extends State<Teams> {
-  final _suggestions = <WordPair>[];
-  final _saved = Set<WordPair>();
+  final _suggestions = <String>[
+
+  ];
+  final _saved = Set<String>();
   final _biggerFont = TextStyle(fontSize: 18.0);
 
   Widget _buildSuggestions() {
@@ -18,19 +21,41 @@ class _TeamsState extends State<Teams> {
         if (i.isOdd) return Divider();
 
         final index = i ~/ 2;
-        if (index >= _suggestions.length) {
-          _suggestions.addAll(generateWordPairs().take(10));
-        }
+        _suggestions.add('Alabama');
+        _suggestions.add('Arkansas');
+        _suggestions.add('Auburn');
+        _suggestions.add('Boston College');
+        _suggestions.add('BYU');
+        _suggestions.add('Clemson');
+        _suggestions.add('CU Boulder');
+        _suggestions.add('Duke');
+        _suggestions.add('Florida');
+        _suggestions.add('FSU');
+        _suggestions.add('Georgia Tech');
+        _suggestions.add('Indiana');
+        _suggestions.add('Louisville');
+        _suggestions.add('LSU');
+        _suggestions.add('NC State');
+        _suggestions.add('Notre Dame');
+        _suggestions.add('Pittsburgh');
+        _suggestions.add('South Carolina');
+        _suggestions.add('Syracuse');
+        _suggestions.add('UGA');
+        _suggestions.add('UNC Chapel Hill');
+        _suggestions.add('Virginia');
+        _suggestions.add('Virginia Tech');
+        _suggestions.add('Wake Forest');
+
         return _buildRow(_suggestions[index]);
-      }
+      },
     );
   }
 
-  Widget _buildRow(WordPair pair) {
-    final alreadySaved = _saved.contains(pair);
+  Widget _buildRow(String team) {
+    final alreadySaved = _saved.contains(team);
     return ListTile(
       title: Text(
-        pair.asPascalCase,
+        team,
         style: _biggerFont,
       ),
       trailing: Icon(
@@ -40,9 +65,9 @@ class _TeamsState extends State<Teams> {
       onTap: () {
         setState(() {
           if (alreadySaved) {
-            _saved.remove(pair);
+            _saved.remove(team);
           } else {
-            _saved.add(pair);
+            _saved.add(team);
           }
         });
       },
@@ -54,10 +79,10 @@ class _TeamsState extends State<Teams> {
       MaterialPageRoute<void>(
         builder: (BuildContext context) {
           final tiles = _saved.map(
-            (WordPair pair) {
+            (String team) {
               return ListTile(
                 title: Text(
-                  pair.asPascalCase,
+                  team,
                   style: _biggerFont,
                 ),
               );
@@ -70,7 +95,7 @@ class _TeamsState extends State<Teams> {
 
           return Scaffold(
             appBar: AppBar(
-              title: Text('Saved Suggestions'),
+              title: Text("Teams You're Following"),
             ),
             body: ListView(children: divided),
           );
@@ -83,7 +108,7 @@ class _TeamsState extends State<Teams> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Teams'),
+        title: Text('NCAA D1 Teams'),
         backgroundColor: Theme.of(context).primaryColor,
         actions: [
           IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
