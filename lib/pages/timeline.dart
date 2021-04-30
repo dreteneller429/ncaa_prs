@@ -14,17 +14,49 @@ class Timeline extends StatefulWidget {
 
 class _TimelineState extends State<Timeline> {
 
+  String event = '';
+  List<String> events = <String>['1000', '800', '400'];
+
   @override
   void initState() {
-    final applicationBloc = Provider.of<ApplicationBloc>(context, listen: false);
     super.initState();
   }
 
-  @override
-  void dispose() {
-    final applicationBloc = Provider.of<ApplicationBloc>(context, listen: false);
-    applicationBloc.dispose();
-    super.dispose();
+  // @override
+  // void dispose() {
+  //   final applicationBloc = Provider.of<ApplicationBloc>(context, listen: false);
+  //   applicationBloc.dispose();
+  //   super.dispose();
+  // }
+  
+  void _pushEvents() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          final tiles = events.map(
+            (String team) {
+              return ListTile(
+                title: Text(
+                  team,
+                  style: TextStyle(fontSize: 18.0),
+                ),
+              );
+            },
+          );
+          final divided = ListTile.divideTiles(
+            context: context,
+            tiles: tiles,
+          ).toList();
+
+          return Scaffold(
+            appBar: AppBar(
+              title: Text("Events"),
+            ),
+            body: ListView(children: divided),
+          );
+        }, 
+      ),
+    );
   }
 
   @override
@@ -33,7 +65,16 @@ class _TimelineState extends State<Timeline> {
     var teams = applicationBloc.subTeams;
 
     return Scaffold(
-      appBar: header(context, isAppTitle: false, titleText: "Favorite Teams"),
+      appBar: AppBar(
+        title: Text('Favorite Teams'),
+        backgroundColor: Theme.of(context).primaryColor,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.list), 
+            onPressed: _pushEvents
+          ),
+        ],
+      ),
       body: Column(
         children: [
           if (teams != null && teams.isNotEmpty)

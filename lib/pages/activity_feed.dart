@@ -11,22 +11,20 @@ class _ActivityFeedState extends State<ActivityFeed> {
 
   @override
   void initState() {
-    final applicationBloc = Provider.of<ApplicationBloc>(context, listen: false);
-    
     super.initState();
   }
 
-  @override
-  void dispose() {
-    final applicationBloc = Provider.of<ApplicationBloc>(context, listen: false);
-    applicationBloc.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   final applicationBloc = Provider.of<ApplicationBloc>(context, listen: false);
+  //   applicationBloc.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
     final applicationBloc = Provider.of<ApplicationBloc>(context);
-    final teamUrl = 'https://www.tfrrs.org/teams/GA_college_f_Georgia_Tech.html';
+    final teamUrl = 'https://www.tfrrs.org/teams/GA_college_m_Georgia_Tech.html';
     
     return Scaffold(
       appBar: AppBar(
