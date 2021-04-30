@@ -14,9 +14,8 @@ class Timeline extends StatefulWidget {
 
 class _TimelineState extends State<Timeline> {
 
-  String event = '';
-  List<String> events = <String>['1000', '800', '400'];
-
+  String currentEvent = 'none';
+  List<String> events = <String>['Long Jump', 'Triple Jump', 'High Jump', 'Weight Throw', 'Hammer Throw', 'Shotput', 'Discus', 'Javelin', 'Pole Vault', '60', '60 Hurdles', '100', '100 Hurdles', '110 Hurdles', '200', '400', '400 Hurdles', '600', '800', '1000', '1500', 'Mile', '3000', '3000S', '5000', '10000', '5k (XC)', '6k (XC)', '8k (XC)', '10k (XC)'];
   @override
   void initState() {
     super.initState();
@@ -28,7 +27,14 @@ class _TimelineState extends State<Timeline> {
   //   applicationBloc.dispose();
   //   super.dispose();
   // }
-  
+
+  void _changeEvent() {
+
+  }
+
+
+
+
   void _pushEvents() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
@@ -40,6 +46,9 @@ class _TimelineState extends State<Timeline> {
                   team,
                   style: TextStyle(fontSize: 18.0),
                 ),
+                onTap: () => {
+                  setState(() {currentEvent = team;})
+              }
               );
             },
           );
@@ -63,6 +72,7 @@ class _TimelineState extends State<Timeline> {
   Widget build(context) {
     final applicationBloc = Provider.of<ApplicationBloc>(context);
     var teams = applicationBloc.subTeams;
+    print(currentEvent);
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -164,16 +174,20 @@ class _TimelineState extends State<Timeline> {
                       width: 400,
                       //color: Colors.grey,
                       child: ListView.separated(
-                        itemCount: teams[index].athletes.length,
+                        itemCount: teams[index].getNumAthletes(currentEvent),
                         itemBuilder: (context, index2) {
                           return ListTile(
                             title: Text(
-                              teams[index].athletes[index2].name,
+                              teams[index].getAthlete(currentEvent, index2).name,
                               style: TextStyle(
                                 color: Colors.black,
                               ),
                             ),
-                            onTap: () => print('${teams[index].athletes[index2].name} tapped'),
+                            onTap: () => {
+                              print('${teams[index].athletes[index2].name} tapped'),
+                            print({teams[index].athletes[index2].events}),
+                              print({teams[index].athletes[index2].prs})
+                            },
                           );
                         },
                         separatorBuilder: (context, index) {
@@ -206,7 +220,6 @@ class _TimelineState extends State<Timeline> {
           ),
         ],
       )
-    )
-    );
+    ));
   }
 }
