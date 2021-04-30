@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ncaa_prs/models/user.dart';
@@ -14,15 +13,10 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   var searchController = TextEditingController();
-  Future<QuerySnapshot> searchResultsFuture;
+
+  get searchResultsFuture => null;
 
   void handleSearch(String query) {
-    var users = usersRef
-      .where('displayName', isGreaterThanOrEqualTo: query)
-      .get();
-    setState(() {
-      searchResultsFuture = users;
-    });
   }
 
   void clearSearch() {
@@ -76,35 +70,17 @@ class _SearchState extends State<Search> {
     );
   }
 
-  FutureBuilder<QuerySnapshot> buildSearchResults() {
-    return FutureBuilder(
-      future: searchResultsFuture,
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return circularProgress();
-        }
-        var searchResults = <UserResult>[];
-        snapshot.data.docs.forEach((doc) {
-          var user = User.fromDocument(doc);
-          var searchResult = UserResult(user);
-          searchResults.add(searchResult);
-        });
-        return ListView(
-          children: searchResults,
-        );
-      }
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor.withOpacity(0.8),
       appBar: buildSearchField(),
-      body: searchResultsFuture == null ? buildNoContent() : 
-            buildSearchResults(),
     );
   }
+}
+
+class QuerySnapshot {
 }
 
 class UserResult extends StatelessWidget {

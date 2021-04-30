@@ -65,6 +65,7 @@ class _TimelineState extends State<Timeline> {
     var teams = applicationBloc.subTeams;
 
     return Scaffold(
+        resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Favorite Teams'),
         backgroundColor: Theme.of(context).primaryColor,
@@ -75,7 +76,8 @@ class _TimelineState extends State<Timeline> {
           ),
         ],
       ),
-      body: Column(
+      body: SingleChildScrollView(
+      child: Column(
         children: [
           if (teams != null && teams.isNotEmpty)
           Container(
@@ -204,6 +206,7 @@ class _TimelineState extends State<Timeline> {
           ),
         ],
       )
+    )
     );
   }
 }

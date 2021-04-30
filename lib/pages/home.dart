@@ -7,11 +7,7 @@ import 'package:ncaa_prs/pages/profile.dart';
 import 'package:ncaa_prs/pages/search.dart';
 import 'package:ncaa_prs/pages/timeline.dart';
 import 'package:ncaa_prs/pages/teams.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-final GoogleSignIn googleSignIn = GoogleSignIn();
-final usersRef = FirebaseFirestore.instance.collection('users');
 final timestamp = DateTime.now();
 User currentUser;
 
@@ -30,62 +26,19 @@ class _HomeState extends State<Home> {
     super.initState();
     pageController = PageController();
     // Detects when user signed in or out
-    googleSignIn.onCurrentUserChanged.listen((account) {
-      handleSignIn(account);
-    }, onError: (err) {
-      print('Error signing in: $err');
-    });
     // Reauthenticate user when app is opened
-    googleSignIn.signInSilently(suppressErrors: false).then((account) {
-        handleSignIn(account);
-      }).catchError((err) {
-        print('Error signing in: $err');
-      });
   }
 
-  void handleSignIn(GoogleSignInAccount account) {
-    if (account != null) {
-      createUserInFirestore();
+  void handleSignIn() {
+
         setState(() {
           isAuth = true;
         });
-      } else {
-        setState(() {
-          isAuth = false;
-        });
-      }
+
   }
 
-  void createUserInFirestore() async {
-    // 1) check if user exists in users collection in database 
-    //    according to their id
-    final user = googleSignIn.currentUser;
-    var doc = await usersRef.doc(user.id).get();
-    
-    if (!doc.exists) {
-    // 2) if user doesn't exist, take them to the create account page
-      final username = await Navigator.push(context, 
-        MaterialPageRoute(builder: (context) => CreateAccount()));
 
-    // 3) get username from create account, use it to make new user 
-    //    document in users collection
-      await usersRef.doc(user.id).set({
-        'id': user.id,
-        'username': username,
-        'photoUrl': user.photoUrl,
-        'email': user.email,
-        'displayName': user.displayName,
-        'bio': '',
-        'timestamp': timestamp,
-      });
 
-      doc = await usersRef.doc(user.id).get();
-    }
-
-    currentUser = User.fromDocument(doc);
-    print(currentUser);
-    print(currentUser.username);
-  }
 
   @override
   void dispose() {
@@ -93,13 +46,6 @@ class _HomeState extends State<Home> {
     super.dispose();
   }
 
-  void login() {
-    googleSignIn.signIn();
-  }
-
-  void logout() {
-    googleSignIn.signOut();
-  }
 
   void onPageChanged(int pageIndex) {
     setState(() {
@@ -163,19 +109,6 @@ class _HomeState extends State<Home> {
                 color: Colors.white,
               )
             ),
-            GestureDetector( // let image act as button
-            onTap: () => login(),
-              child: Container(
-                width: 260.0,
-                height: 60.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/google_signin_button.png'),
-                    fit: BoxFit.cover // cover whole space of container
-                  )
-                ),
-              ),
-            )
           ],
         ),
       ),
@@ -184,6 +117,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return isAuth ? buildAuthScreen() : buildUnAuthScreen();
+    return  buildAuthScreen();
   }
 }

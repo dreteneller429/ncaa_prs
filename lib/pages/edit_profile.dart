@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ncaa_prs/models/user.dart';
 import 'package:ncaa_prs/pages/home.dart';
@@ -29,20 +28,6 @@ class _EditProfileState extends State<EditProfile> {
   @override
   void initState() {
     super.initState();
-    getUser();
-  }
-
-  getUser() async {
-    setState(() {
-      isLoading = true;
-    });
-    DocumentSnapshot doc = await usersRef.doc(widget.currentUserId).get();
-    user = User.fromDocument(doc);
-    displayNameController.text = user.displayName;
-    bioController.text = user.bio;
-    setState(() {
-      isLoading = false;
-    });
   }
 
   Column buildDisplayNameField() {
@@ -87,27 +72,7 @@ class _EditProfileState extends State<EditProfile> {
     );
   }
 
-  updateProfileData() {
-    setState(() {
-      displayNameController.text.trim().length < 3 ||
-      displayNameController.text.isEmpty ? _displayNameValid = false : 
-      _displayNameValid = true;
-      bioController.text.trim().length > 100 ? _bioValid = false : 
-      _bioValid = true;
-    });
-
-    if (_displayNameValid && _bioValid) {
-      usersRef.doc(widget.currentUserId).update({
-        'displayName': displayNameController.text,
-        'bio': bioController.text,
-      });
-      var snackbar = SnackBar(content: Text('Profile Updated!'));
-      _scaffoldKey.currentState.showSnackBar(snackbar);
-    }
-  }
-
   logout() async {
-    await googleSignIn.signOut();
     await Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
   }
 
@@ -156,7 +121,6 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: updateProfileData,
                   child: Text(
                     'Update Profile',
                     style: TextStyle(

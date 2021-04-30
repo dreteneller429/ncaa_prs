@@ -11,7 +11,7 @@ class TeamService {
   Future<List<Athlete>> fetchTeam(String teamUrl) async {
     //var teamUrl = 'https://www.tfrrs.org/teams/GA_college_m_Georgia_Tech.html';
     var url = 'https://ncaaprs-backend.herokuapp.com/api/athletes/?param1=${teamUrl}';
-    var response = await http.get(url);
+    var response = await http.get(Uri.parse(url));
     var json = convert.jsonDecode(response.body);
     var athletes = json['athletes'];
     
