@@ -72,6 +72,11 @@ class Team {
 
   int getNumAthletes(event) {
     switch (event) {
+      case "Roster":
+        {
+          return this.athletes.length;
+        }
+        break;
       case "Long Jump":
         {
           return this.athletesLJ.length;
@@ -187,7 +192,7 @@ class Team {
           return this.athletes3000.length;
         }
         break;
-      case "3000S":
+      case "3000 Steeple":
         {
           return this.athletes3000S.length;
         }
@@ -202,21 +207,21 @@ class Team {
           return this.athletes10000.length;
         }
         break;
-      case "5k (XC)":
+      case "5K (XC)":
         {
           return this.athletes5k.length;
         }
         break;
-      case "6k (XC)":
+      case "6K (XC)":
         {
           return this.athletes6k.length;
         }
         break;
-      case "8k (XC)":
+      case "8K (XC)":
         {
           return this.athletes8k.length;
         }
-      case "10k (XC)":
+      case "10K (XC)":
         {
           return this.athletes10k.length;
         }
@@ -227,6 +232,12 @@ class Team {
 
   Athlete getAthlete(event, index) {
     switch (event) {
+      case "Roster":
+        {
+          return this.athletes[index];
+        }
+        break;
+
       case "Long Jump":
         {
           return this.athletesLJ[index];
@@ -342,7 +353,7 @@ class Team {
           return this.athletes3000[index];
         }
         break;
-      case "3000S":
+      case "3000 Steeple":
         {
           return this.athletes3000S[index];
         }
@@ -357,21 +368,21 @@ class Team {
           return this.athletes10000[index];
         }
         break;
-      case "5k (XC)":
+      case "5K (XC)":
         {
           return this.athletes5k[index];
         }
         break;
-      case "6k (XC)":
+      case "6K (XC)":
         {
           return this.athletes6k[index];
         }
         break;
-      case "8k (XC)":
+      case "8K (XC)":
         {
           return this.athletes8k[index];
         }
-      case "10k (XC)":
+      case "10K (XC)":
         {
           return this.athletes10k[index];
         }

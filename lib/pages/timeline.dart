@@ -14,8 +14,8 @@ class Timeline extends StatefulWidget {
 
 class _TimelineState extends State<Timeline> {
 
-  String currentEvent = 'none';
-  List<String> events = <String>['Long Jump', 'Triple Jump', 'High Jump', 'Weight Throw', 'Hammer Throw', 'Shotput', 'Discus', 'Javelin', 'Pole Vault', '60', '60 Hurdles', '100', '100 Hurdles', '110 Hurdles', '200', '400', '400 Hurdles', '600', '800', '1000', '1500', 'Mile', '3000', '3000S', '5000', '10000', '5k (XC)', '6k (XC)', '8k (XC)', '10k (XC)'];
+  String currentEvent = 'Roster';
+  List<String> events = <String>['Roster', 'Long Jump', 'Triple Jump', 'High Jump', 'Weight Throw', 'Hammer Throw', 'Shotput', 'Discus', 'Javelin', 'Pole Vault', '60', '60 Hurdles', '100', '100 Hurdles', '110 Hurdles', '200', '400', '400 Hurdles', '600', '800', '1000', '1500', 'Mile', '3000', '3000 Steeple', '5000', '10000', '5K (XC)', '6K (XC)', '8K (XC)', '10K (XC)'];
   @override
   void initState() {
     super.initState();
@@ -177,16 +177,16 @@ class _TimelineState extends State<Timeline> {
                         itemCount: teams[index].getNumAthletes(currentEvent),
                         itemBuilder: (context, index2) {
                           return ListTile(
-                            title: Text(
-                              teams[index].getAthlete(currentEvent, index2).name,
+                            title: Text(currentEvent == "Roster" ?
+                              teams[index].getAthlete(currentEvent, index2).name :  teams[index].getAthlete(currentEvent, index2).name + '   -   ' + teams[index].getAthlete(currentEvent, index2).prs[teams[index].getAthlete(currentEvent, index2).events.indexWhere((event) => event == currentEvent) ],
                               style: TextStyle(
                                 color: Colors.black,
                               ),
                             ),
                             onTap: () => {
-                              print('${teams[index].athletes[index2].name} tapped'),
-                            print({teams[index].athletes[index2].events}),
-                              print({teams[index].athletes[index2].prs})
+                              print(teams[index].getAthlete(currentEvent, index2).name +  'tapped'),
+                            print(teams[index].getAthlete(currentEvent, index2).events),
+                              print(teams[index].getAthlete(currentEvent, index2).prs)
                             },
                           );
                         },

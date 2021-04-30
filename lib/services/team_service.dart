@@ -14,14 +14,98 @@ class TeamService {
       var name = decodedAthlete['name'];
       var prs = decodedAthlete['prs'] as List;
       var athletePrs = new List();
+      var events = new List();
       for (int i = 0; i < prs.length; i++) {
         if (i%2 == 0) {
+          prs[i].trim();
+          prs[i] = prs[i].replaceAll("\n", "");
+          prs[i] = prs[i].replaceAll("\t", "");
+          prs[i].trim();
+          print(prs[i]);
+          switch (prs[i]) {
+            case "LJ":
+              {
+                prs[i] = "Long Jump";
+              }
+              break;
+            case "TJ":
+              {
+                prs[i] = "Triple Jump";
+              }
+              break;
+            case "HJ":
+              {
+                prs[i] = "High Jump";
+              }
+              break;
+            case "WT":
+              {
+                prs[i] = "Weight Throw";
+              }
+              break;
+            case "HT":
+              {
+                prs[i] = "Hammer Throw";
+              }
+              break;
+            case "ST":
+              {
+                prs[i] = "Shotput";
+              }
+              break;
+            case "DT":
+              {
+                prs[i] = "Discus";
+              }
+              break;
+            case "JT":
+              {
+                prs[i] = "Javelin";
+              }
+              break;
+            case "PV":
+              {
+                prs[i] = "Pole Vault";
+              }
+              break;
+            case "60H":
+              {
+                prs[i] = "60 Hurdles";
+              }
+              break;
+            case "100H":
+              {
+                prs[i] = "100 Hurdles";
+              }
+              break;
+            case "110H":
+              {
+                prs[i] = "110 Hurdles";
+              }
+              break;
+            case "400H":
+              {
+                prs[i] = "400 Hurdles";
+              }
+              break;
+            case "MILE":
+              {
+                prs[i] = "Mile";
+              }
+              break;
+            case "3000S":
+              {
+                prs[i] = "3000 Steeple";
+              }
+              break;
+          }
+          events.add(prs[i]);
         } else {
           athletePrs.add(prs[i]);
         }
       }
-
-      Athlete alanDrosky = new Athlete(name: name, events: event, prs: athletePrs);
+    print(events);
+      Athlete alanDrosky = new Athlete(name: name, events: events, prs: athletePrs);
       allanDrosky.add(alanDrosky);
 
     });
