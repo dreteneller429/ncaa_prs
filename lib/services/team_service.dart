@@ -13,6 +13,8 @@ class TeamService {
       var decodedAthlete = convert.jsonDecode(convert.jsonDecode(athlete));
       var name = decodedAthlete['name'];
       var prs = decodedAthlete['prs'] as List;
+      var link = decodedAthlete['link'];
+      link = "https:" + link;
       var athletePrs = new List();
       var events = new List();
       for (int i = 0; i < prs.length; i++) {
@@ -110,7 +112,7 @@ class TeamService {
         }
       }
     print(events);
-      Athlete alanDrosky = new Athlete(name: name, events: events, prs: athletePrs);
+      Athlete alanDrosky = new Athlete(name: name, events: events, prs: athletePrs, link: link);
       allanDrosky.add(alanDrosky);
 
     });
@@ -269,6 +271,8 @@ class TeamService {
 
       var events = new List();
       var athletePrs = new List();
+      var link = decodedAthlete['link'];
+      link = "https:" + link;
 
       for (int i = 0; i < prs.length; i++) {
         if (i%2 == 0) {
@@ -278,7 +282,7 @@ class TeamService {
         }
       }
 
-      Athlete alanDrosky = new Athlete(name: name, events: events, prs: athletePrs);
+      Athlete alanDrosky = new Athlete(name: name, events: events, prs: athletePrs, link: link);
       allanDrosky.add(alanDrosky);
     });
 

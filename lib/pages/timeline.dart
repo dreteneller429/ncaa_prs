@@ -5,6 +5,7 @@ import 'package:ncaa_prs/blocs/application_bloc.dart';
 import 'package:ncaa_prs/widgets/header.dart';
 import 'package:ncaa_prs/widgets/progress.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class Timeline extends StatefulWidget {
@@ -183,7 +184,10 @@ class _TimelineState extends State<Timeline> {
                                 color: Colors.black,
                               ),
                             ),
-                            onTap: () => {
+                            onTap: ()  => {
+                               launch(teams[index].getAthlete(currentEvent, index2).link),
+
+                          // can't launch url, there is some erro
                               print(teams[index].getAthlete(currentEvent, index2).name +  'tapped'),
                             print(teams[index].getAthlete(currentEvent, index2).events),
                               print(teams[index].getAthlete(currentEvent, index2).prs)
