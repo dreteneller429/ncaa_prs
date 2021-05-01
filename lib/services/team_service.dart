@@ -48,7 +48,7 @@ class TeamService {
                 prs[i] = "Hammer Throw";
               }
               break;
-            case "ST":
+            case "SP":
               {
                 prs[i] = "Shotput";
               }
@@ -98,6 +98,11 @@ class TeamService {
                 prs[i] = "3000 Steeple";
               }
               break;
+            case "10,000":
+              {
+                prs[i] = "10000";
+              }
+              break;
           }
           events.add(prs[i]);
         } else {
@@ -122,6 +127,8 @@ class TeamService {
 
     var athletesLJ = json['athletesLJ'];
     List<Athlete> allanDroskyLJ = new List<Athlete>();
+    setTeamEvent(athletesLJ, allanDroskyLJ);
+
     var athletesTJ = json['athletesTJ'];
     List<Athlete> allanDroskyTJ= new List<Athlete>();
     setTeamEvent(athletesTJ, allanDroskyTJ);

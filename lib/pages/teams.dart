@@ -1,6 +1,15 @@
 import 'package:english_words/english_words.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:searchfield/searchfield.dart';
+import 'package:autocomplete_textfield/autocomplete_textfield.dart';
+import 'package:flutter/material.dart';
+import 'package:ncaa_prs/blocs/application_bloc.dart';
+import 'package:provider/provider.dart';
+
+
 
 class Teams extends StatefulWidget {
   @override
@@ -8,113 +17,90 @@ class Teams extends StatefulWidget {
 }
 
 class _TeamsState extends State<Teams> {
+
+  final GlobalKey<AutoCompleteTextFieldState> key = new GlobalKey();
   final _suggestions = <String>[
 
   ];
   final _saved = Set<String>();
   final _biggerFont = TextStyle(fontSize: 18.0);
 
-  Widget _buildSuggestions() {
-    return ListView.builder(
-      padding: EdgeInsets.all(16.0),
-      itemBuilder: /*1*/ (context, i) {
-        if (i.isOdd) return Divider();
+  var testSug = ["Florida", "FSU", "Alabama", "Flocka"];
+  var allMaleTeams = ['Abilene Christian', 'Air Force', 'Akron', 'Alabama', 'Alabama A&M', 'Alabama State', 'Albany', 'Alcorn State', 'American', 'Appalachian State', 'Arizona', 'Arizona State', 'Arkansas', 'Arkansas State', 'Arkansas-Little Rock', 'Arkansas-Pine Bluff', 'Army West Point', 'Auburn', 'Austin Peay', 'BYU', 'Ball State', 'Baylor', 'Bellarmine', 'Belmont', 'Bethune-Cookman', 'Binghamton', 'Boise State', 'Boston College', 'Boston University', 'Bowling Green', 'Bradley', 'Brown', 'Bryant', 'Bucknell', 'Buffalo', 'Butler', 'CBU', 'CSU Bakersfield', 'CSUN', 'Cal Poly', 'Cal St. Fullerton', 'California', 'Campbell', 'Canisius', 'Central Arkansas', 'Central Connecticut', 'Central Michigan', 'Charleston Southern', 'Charlotte', 'Chattanooga', 'Chicago State', 'Cincinnati', 'Citadel', 'Clemson', 'Cleveland St.', 'Coastal Carolina', 'Col. of Charleston', 'Colgate', 'Colorado', 'Colorado St.', 'Columbia', 'Connecticut', 'Coppin State', 'Cornell', 'Creighton', 'Dartmouth', 'Davidson', 'Dayton', 'DePaul', 'Delaware', 'Delaware State', 'Denver', 'Detroit Mercy', 'Dixie State', 'Drake', 'Duke', 'Duquesne', 'East Carolina', 'East Tenn. St.', 'Eastern Illinois', 'Eastern Kentucky', 'Eastern Michigan', 'Eastern Washington', 'Elon', 'Evansville', 'FIU', 'Fairfield', 'Fairleigh Dickinson', 'Florida', 'Florida A&M', 'Florida Atlantic', 'Florida Gulf Coast', 'Florida State', 'Fordham', 'Fresno State', 'Furman', 'Gardner-Webb', 'George Mason', 'George Washington', 'Georgetown', 'Georgia', 'Georgia Southern',
+  'Georgia State', 'Georgia Tech', 'Gonzaga', 'Grambling', 'Grand Canyon', 'Hampton', 'Hartford', 'Harvard', 'Hawaii', 'High Point', 'Hofstra', 'Holy Cross', 'Houston',
+  'Houston Baptist', 'Howard', 'IUPUI', 'Idaho', 'Idaho State', 'Illinois', 'Illinois State', 'Illinois-Chicago', 'Incarnate Word', 'Indiana', 'Indiana State', 'Iona', 'Iowa', 'Iowa State', 'Jackson State', 'Jacksonville', 'Jacksonville St.', 'James Madison', 'Kansas', 'Kansas City', 'Kansas State', 'Kennesaw State', 'Kent State', 'Kentucky', 'LIU', 'LSU', 'La Salle', 'Lafayette', 'Lamar', 'Lehigh', 'Liberty', 'Lipscomb', 'Long Beach St.', 'Longwood', 'Louisiana Tech', 'Louisville', 'Loyola (Ill.)', 'Loyola (Md.)', 'Loyola Marymount', 'Maine', 'Manhattan', 'Marist', 'Marquette', 'Marshall', 'Maryland', 'Maryland-Eastern Shore', 'McNeese State', 'Memphis', 'Mercer', 'Merrimack', 'Miami (Fla.)', 'Miami (Ohio)', 'Michigan', 'Michigan State', 'Mid. Tenn. State', 'Milwaukee', 'Minnesota', 'Miss State', 'Mississippi Valley', 'Missouri', 'Monmouth', 'Montana', 'Montana State', 'Morehead State', 'Morgan State', "Mount St. Mary's", 'Murray State', 'N. Carolina A&T', 'N.C. Central', 'NC State', 'Navy', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey Institute', 'New Mexico', 'New Mexico St.', 'New Orleans', 'Niagara', 'Nicholls State', 'Norfolk State', 'NorthAlabama', 'North Carolina', 'North Dakota', 'North Dakota State', 'North Florida', 'North Texas', 'Northeastern', 'Northern Arizona', 'Northern Colorado', 'Northern Iowa', 'Northern Kentucky', 'Northwestern St.', 'Notre Dame', 'Oakland', 'Ohio', 'Ohio State', 'Oklahoma', 'Oklahoma State', 'Ole Miss', 'Oral Roberts', 'Oregon', 'Oregon State', 'Pacific', 'Penn', 'Penn State', 'Pepperdine', 'Pittsburgh', 'Portland', 'Portland State', 'Prairie View', 'Presbyterian', 'Princeton', 'Providence', 'Purdue', 'Purdue Fort Wayne', 'Quinnipiac', 'Radford', 'Rhode Island', 'Rice', 'Richmond', 'Rider', 'Robert Morris', 'Rutgers', 'SE Louisiana', 'SE Missouri', 'SIU Edwardsville', 'SMU', 'Sacramento St.', 'Sacred Heart', 'Saint Francis University', 'Saint Louis', 'Sam Houston', 'Samford', 'San Diego', 'San Diego St.', 'San Francisco', 'San Jose St.', 'Santa Clara', 'Seattle U.', 'Seton Hall', 'Siena', 'South Alabama', 'South Carolina', 'South Carolina St.', 'South Dakota', 'South Dakota St.', 'South Florida', 'Southern', 'Southern Illinois', 'Southern Miss.', 'Southern Utah', 'St. Bonaventure', 'St. Francis (N.Y.)', "St. Joseph\'s (Pa.)", "St. Mary's (Cal.)", "St. Peter's", 'Stanford', 'Stephen F. Austin', 'Stetson', 'Stony Brook', 'Syracuse', 'TCU', 'Tarleton State', 'Temple', 'Tennessee', 'Tennessee St.', 'Tennessee Tech', 'Tennessee-Martin', 'Texas', 'Texas A&M', 'Texas A&M-CC', 'Texas Christian', 'Texas Southern', 'Texas State', 'Texas Tech', 'Toledo', 'Towson', 'Troy', 'Tulane', 'Tulsa', 'U. of Victoria', 'UAB', 'UC Davis', 'UC Irvine', 'UC Riverside', 'UC San Diego', 'UC Santa Barbara', 'UCF', 'UCLA', 'UL-Lafayette', 'UL-Monroe', 'UMBC', 'UMass Amherst', 'UMass Lowell', 'UNC-Asheville', 'UNC-Greensboro', 'UNCW', 'USC', 'USC Upstate', 'UT-Arlington', 'UT-Chattanooga', 'UT-Rio Grande Valley', 'UTEP', 'UTSA', 'Utah', 'Utah State', 'Utah Valley', 'VCU', 'VMI', 'Valparaiso', 'Vanderbilt', 'Vermont', 'Villanova', 'Virginia', 'Virginia Tech', 'Wagner', 'Wake Forest', 'Washington', 'Washington St.', 'Weber State', 'West Virginia', 'Western Carolina', 'Western Illinois', 'Western Kentucky', 'Western Michigan', 'Wichita State', 'William and Mary', 'Winthrop', 'Wis.-Green Bay', 'Wisconsin', 'Wofford', 'Wright State', 'Wyoming', 'Xavier (Ohio)', 'Yale', 'Youngstown St.'];
 
-        final index = i ~/ 2;
-        _suggestions.add('Alabama');
-        _suggestions.add('Arkansas');
-        _suggestions.add('Auburn');
-        _suggestions.add('Boston College');
-        _suggestions.add('BYU');
-        _suggestions.add('Clemson');
-        _suggestions.add('CU Boulder');
-        _suggestions.add('Duke');
-        _suggestions.add('Florida');
-        _suggestions.add('FSU');
-        _suggestions.add('Georgia Tech');
-        _suggestions.add('Indiana');
-        _suggestions.add('Louisville');
-        _suggestions.add('LSU');
-        _suggestions.add('NC State');
-        _suggestions.add('Notre Dame');
-        _suggestions.add('Pittsburgh');
-        _suggestions.add('South Carolina');
-        _suggestions.add('Syracuse');
-        _suggestions.add('UGA');
-        _suggestions.add('UNC Chapel Hill');
-        _suggestions.add('Virginia');
-        _suggestions.add('Virginia Tech');
-        _suggestions.add('Wake Forest');
 
-        return _buildRow(_suggestions[index]);
-      },
-    );
-  }
+  var allMaleLinks = ['https://www.tfrrs.org/teams/TX_college_m_Abilene_Christian.html', 'https://www.tfrrs.org/teams/CO_college_m_Air_Force.html', 'https://www.tfrrs.org/teams/OH_college_m_Akron.html', 'https://www.tfrrs.org/teams/AL_college_m_Alabama.html', 'https://www.tfrrs.org/teams/AL_college_m_Alabama_AM.html', 'https://www.tfrrs.org/teams/AL_college_m_Alabama_State.html', 'https://www.tfrrs.org/teams/NY_college_m_Albany.html', 'https://www.tfrrs.org/teams/MS_college_m_Alcorn_State.html', 'https://www.tfrrs.org/teams/DC_college_m_American.html', 'https://www.tfrrs.org/teams/NC_college_m_Appalachian_State.html', 'https://www.tfrrs.org/teams/AZ_college_m_Arizona.html', 'https://www.tfrrs.org/teams/AZ_college_m_Arizona_State.html', 'https://www.tfrrs.org/teams/AR_college_m_Arkansas.html', 'https://www.tfrrs.org/teams/AR_college_m_Arkansas_State.html', 'https://www.tfrrs.org/teams/AR_college_m_Arkansas_Little_Rock.html', 'https://www.tfrrs.org/teams/AR_college_m_Arkansas_Pine_Bluff.html', 'https://www.tfrrs.org/teams/NY_college_m_Army_West_Point.html', 'https://www.tfrrs.org/teams/AL_college_m_Auburn.html', 'https://www.tfrrs.org/teams/xc/TN_college_m_Austin_Peay.html', 'https://www.tfrrs.org/teams/UT_college_m_BYU.html', 'https://www.tfrrs.org/teams/IN_college_m_Ball_State.html', 'https://www.tfrrs.org/teams/TX_college_m_Baylor.html', 'https://www.tfrrs.org/teams/KY_college_m_Bellarmine.html', 'https://www.tfrrs.org/teams/TN_college_m_Belmont.html', 'https://www.tfrrs.org/teams/FL_college_m_Bethune_Cookman.html', 'https://www.tfrrs.org/teams/NY_college_m_Binghamton.html', 'https://www.tfrrs.org/teams/ID_college_m_Boise_State.html', 'https://www.tfrrs.org/teams/MA_college_m_Boston_College.html', 'https://www.tfrrs.org/teams/MA_college_m_Boston_U.html', 'https://www.tfrrs.org/teams/OH_college_m_Bowling_Green.html', 'https://www.tfrrs.org/teams/IL_college_m_Bradley.html', 'https://www.tfrrs.org/teams/RI_college_m_Brown.html', 'https://www.tfrrs.org/teams/RI_college_m_Bryant.html', 'https://www.tfrrs.org/teams/PA_college_m_Bucknell.html', 'https://www.tfrrs.org/teams/NY_college_m_Buffalo.html', 'https://www.tfrrs.org/teams/IN_college_m_Butler.html', 'https://www.tfrrs.org/teams/CA_college_m_California_Baptist.html', 'https://www.tfrrs.org/teams/CA_college_m_Cal_St_Bakersfield.html', 'https://www.tfrrs.org/teams/CA_college_m_Cal_St_Northridge.html', 'https://www.tfrrs.org/teams/CA_college_m_Cal_Poly.html', 'https://www.tfrrs.org/teams/CA_college_m_Cal_St_Fullerton.html', 'https://www.tfrrs.org/teams/CA_college_m_California_CA.html', 'https://www.tfrrs.org/teams/NC_college_m_Campbell.html', 'https://www.tfrrs.org/teams/NY_college_m_Canisius.html', 'https://www.tfrrs.org/teams/AR_college_m_Central_Arkansas.html', 'https://www.tfrrs.org/teams/CT_college_m_Central_Connecticut.html', 'https://www.tfrrs.org/teams/MI_college_m_Central_Michigan.html', 'https://www.tfrrs.org/teams/SC_college_m_Charleston_Southern.html', 'https://www.tfrrs.org/teams/NC_college_m_Charlotte.html', 'https://www.tfrrs.org/teams/xc/TN_college_m_Chattanooga.html', 'https://www.tfrrs.org/teams/IL_college_m_Chicago_State.html', 'https://www.tfrrs.org/teams/OH_college_m_Cincinnati.html', 'https://www.tfrrs.org/teams/SC_college_m_Citadel.html', 'https://www.tfrrs.org/teams/SC_college_m_Clemson.html', 'https://www.tfrrs.org/teams/OH_college_m_Cleveland_St.html', 'https://www.tfrrs.org/teams/SC_college_m_Coastal_Carolina.html', 'https://www.tfrrs.org/teams/SC_college_m_Col_of_Charleston.html', 'https://www.tfrrs.org/teams/NY_college_m_Colgate.html', 'https://www.tfrrs.org/teams/CO_college_m_Colorado.html', 'https://www.tfrrs.org/teams/CO_college_m_Colorado_St.html',
+  'https://www.tfrrs.org/teams/NY_college_m_Columbia.html', 'https://www.tfrrs.org/teams/CT_college_m_Connecticut.html', 'https://www.tfrrs.org/teams/MD_college_m_Coppin_State.html', 'https://www.tfrrs.org/teams/NY_college_m_Cornell.html', 'https://www.tfrrs.org/teams/NE_college_m_Creighton.html', 'https://www.tfrrs.org/teams/NH_college_m_Dartmouth.html', 'https://www.tfrrs.org/teams/NC_college_m_Davidson.html', 'https://www.tfrrs.org/teams/OH_college_m_Dayton.html', 'https://www.tfrrs.org/teams/IL_college_m_DePaul.html', 'https://www.tfrrs.org/teams/DE_college_m_Delaware.html', 'https://www.tfrrs.org/teams/DE_college_m_Delaware_State.html', 'https://www.tfrrs.org/teams/CO_college_m_Denver.html', 'https://www.tfrrs.org/teams/MI_college_m_Detroit_Mercy.html', 'https://www.tfrrs.org/teams/UT_college_m_Dixie_State.html', 'https://www.tfrrs.org/teams/IA_college_m_Drake.html', 'https://www.tfrrs.org/teams/NC_college_m_Duke.html', 'https://www.tfrrs.org/teams/PA_college_m_Duquesne.html', 'https://www.tfrrs.org/teams/NC_college_m_East_Carolina.html', 'https://www.tfrrs.org/teams/TN_college_m_East_Tenn_St.html', 'https://www.tfrrs.org/teams/IL_college_m_Eastern_Illinois.html', 'https://www.tfrrs.org/teams/KY_college_m_Eastern_Kentucky.html', 'https://www.tfrrs.org/teams/MI_college_m_Eastern_Michigan.html', 'https://www.tfrrs.org/teams/WA_college_m_Eastern_Washington.html', 'https://www.tfrrs.org/teams/NC_college_m_Elon.html', 'https://www.tfrrs.org/teams/IN_college_m_Evansville.html', 'https://www.tfrrs.org/teams/FL_college_m_Florida_Intl.html', 'https://www.tfrrs.org/teams/CT_college_m_Fairfield.html', 'https://www.tfrrs.org/teams/NJ_college_m_Fairleigh_Dickinson.html', 'https://www.tfrrs.org/teams/FL_college_m_Florida.html', 'https://www.tfrrs.org/teams/FL_college_m_Florida_AM.html', 'https://www.tfrrs.org/teams/FL_college_m_Florida_Atlantic.html', 'https://www.tfrrs.org/teams/FL_college_m_Florida_Gulf_Coast.html', 'https://www.tfrrs.org/teams/FL_college_m_Florida_State.html',
+  'https://www.tfrrs.org/teams/NY_college_m_Fordham.html', 'https://www.tfrrs.org/teams/CA_college_m_Fresno_State.html', 'https://www.tfrrs.org/teams/SC_college_m_Furman.html', 'https://www.tfrrs.org/teams/NC_college_m_Gardner_Webb.html', 'https://www.tfrrs.org/teams/VA_college_m_George_Mason.html', 'https://www.tfrrs.org/teams/DC_college_m_George_Washington.html', 'https://www.tfrrs.org/teams/DC_college_m_Georgetown_DC.html', 'https://www.tfrrs.org/teams/GA_college_m_Georgia.html', 'https://www.tfrrs.org/teams/GA_college_m_Georgia_Southern.html', 'https://www.tfrrs.org/teams/GA_college_m_Georgia_State.html', 'https://www.tfrrs.org/teams/GA_college_m_Georgia_Tech.html', 'https://www.tfrrs.org/teams/WA_college_m_Gonzaga.html', 'https://www.tfrrs.org/teams/LA_college_m_Grambling.html', 'https://www.tfrrs.org/teams/AZ_college_m_Grand_Canyon.html', 'https://www.tfrrs.org/teams/VA_college_m_Hampton.html', 'https://www.tfrrs.org/teams/CT_college_m_Hartford.html', 'https://www.tfrrs.org/teams/MA_college_m_Harvard.html', 'https://www.tfrrs.org/teams/xc/HI_college_m_Hawaii.html', 'https://www.tfrrs.org/teams/NC_college_m_High_Point.html', 'https://www.tfrrs.org/teams/NY_college_m_Hofstra.html', 'https://www.tfrrs.org/teams/MA_college_m_Holy_Cross.html', 'https://www.tfrrs.org/teams/TX_college_m_Houston.html', 'https://www.tfrrs.org/teams/TX_college_m_Houston_Baptist.html', 'https://www.tfrrs.org/teams/DC_college_m_Howard.html', 'https://www.tfrrs.org/teams/IN_college_m_IUPUI.html', 'https://www.tfrrs.org/teams/ID_college_m_Idaho.html', 'https://www.tfrrs.org/teams/ID_college_m_Idaho_State.html', 'https://www.tfrrs.org/teams/IL_college_m_Illinois.html',
+  'https://www.tfrrs.org/teams/IL_college_m_Illinois_State.html', 'https://www.tfrrs.org/teams/IL_college_m_Illinois_Chicago.html', 'https://www.tfrrs.org/teams/TX_college_m_Incarnate_Word.html', 'https://www.tfrrs.org/teams/IN_college_m_Indiana_IN.html', 'https://www.tfrrs.org/teams/IN_college_m_Indiana_State.html', 'https://www.tfrrs.org/teams/NY_college_m_Iona.html', 'https://www.tfrrs.org/teams/IA_college_m_Iowa.html', 'https://www.tfrrs.org/teams/IA_college_m_Iowa_State.html', 'https://www.tfrrs.org/teams/MS_college_m_Jackson_State.html', 'https://www.tfrrs.org/teams/xc/FL_college_m_Jacksonville.html', 'https://www.tfrrs.org/teams/AL_college_m_Jacksonville_St.html', 'https://www.tfrrs.org/teams/VA_college_m_James_Madison.html', 'https://www.tfrrs.org/teams/KS_college_m_Kansas.html', 'https://www.tfrrs.org/teams/MO_college_m_Kansas_City.html', 'https://www.tfrrs.org/teams/KS_college_m_Kansas_State.html', 'https://www.tfrrs.org/teams/GA_college_m_Kennesaw_State.html', 'https://www.tfrrs.org/teams/OH_college_m_Kent_State.html', 'https://www.tfrrs.org/teams/KY_college_m_Kentucky.html', 'https://www.tfrrs.org/teams/NY_college_m_Long Island University.html', 'https://www.tfrrs.org/teams/LA_college_m_LSU.html', 'https://www.tfrrs.org/teams/PA_college_m_La_Salle.html', 'https://www.tfrrs.org/teams/PA_college_m_Lafayette.html', 'https://www.tfrrs.org/teams/TX_college_m_Lamar.html', 'https://www.tfrrs.org/teams/PA_college_m_Lehigh.html', 'https://www.tfrrs.org/teams/VA_college_m_Liberty.html', 'https://www.tfrrs.org/teams/TN_college_m_Lipscomb.html', 'https://www.tfrrs.org/teams/CA_college_m_Long_Beach_St.html', 'https://www.tfrrs.org/teams/VA_college_m_Longwood.html', 'https://www.tfrrs.org/teams/LA_college_m_Louisiana_Tech.html', 'https://www.tfrrs.org/teams/KY_college_m_Louisville.html', 'https://www.tfrrs.org/teams/IL_college_m_Loyola_IL.html', 'https://www.tfrrs.org/teams/MD_college_m_Loyola_MD.html', 'https://www.tfrrs.org/teams/CA_college_m_Loyola_Marymount.html', 'https://www.tfrrs.org/teams/ME_college_m_Maine.html', 'https://www.tfrrs.org/teams/NY_college_m_Manhattan.html', 'https://www.tfrrs.org/teams/NY_college_m_Marist.html', 'https://www.tfrrs.org/teams/WI_college_m_Marquette.html', 'https://www.tfrrs.org/teams/WV_college_m_Marshall.html', 'https://www.tfrrs.org/teams/MD_college_m_Maryland.html', 'https://www.tfrrs.org/teams/MD_college_m_Maryland_Eastern_Shore.html', 'https://www.tfrrs.org/teams/LA_college_m_McNeese_State.html', 'https://www.tfrrs.org/teams/TN_college_m_Memphis.html', 'https://www.tfrrs.org/teams/xc/GA_college_m_Mercer.html', 'https://www.tfrrs.org/teams/MA_college_m_Merrimack.html', 'https://www.tfrrs.org/teams/FL_college_m_Miami_FL.html', 'https://www.tfrrs.org/teams/OH_college_m_Miami_OH.html', 'https://www.tfrrs.org/teams/MI_college_m_Michigan.html', 'https://www.tfrrs.org/teams/MI_college_m_Michigan_State.html', 'https://www.tfrrs.org/teams/TN_college_m_Mid_Tenn_State.html', 'https://www.tfrrs.org/teams/WI_college_m_Milwaukee.html', 'https://www.tfrrs.org/teams/MN_college_m_Minnesota.html', 'https://www.tfrrs.org/teams/MS_college_m_Mississippi_St.html', 'https://www.tfrrs.org/teams/MS_college_m_Mississippi_Valley.html', 'https://www.tfrrs.org/teams/MO_college_m_Missouri.html', 'https://www.tfrrs.org/teams/NJ_college_m_Monmouth_NJ.html', 'https://www.tfrrs.org/teams/MT_college_m_Montana.html', 'https://www.tfrrs.org/teams/MT_college_m_Montana_State.html', 'https://www.tfrrs.org/teams/KY_college_m_Morehead_State.html', 'https://www.tfrrs.org/teams/MD_college_m_Morgan_State.html', 'https://www.tfrrs.org/teams/MD_college_m_Mount_St_Marys.html"     >Mount St. Mary', 'https://www.tfrrs.org/teams/KY_college_m_Murray_State.html', 'https://www.tfrrs.org/teams/NC_college_m_N_Carolina_AT.html', 'https://www.tfrrs.org/teams/NC_college_m_NC_Central.html',
+  'https://www.tfrrs.org/teams/NC_college_m_North_Carolina_St.html', 'https://www.tfrrs.org/teams/MD_college_m_Navy.html', 'https://www.tfrrs.org/teams/NE_college_m_Nebraska.html', 'https://www.tfrrs.org/teams/xc/NV_college_m_Nevada.html', 'https://www.tfrrs.org/teams/NH_college_m_New_Hampshire.html', 'https://www.tfrrs.org/teams/NJ_college_m_New_Jersey_Institute.html', 'https://www.tfrrs.org/teams/NM_college_m_New_Mexico.html', 'https://www.tfrrs.org/teams/NM_college_m_New_Mexico_St.html', 'https://www.tfrrs.org/teams/LA_college_m_New_Orleans.html', 'https://www.tfrrs.org/teams/NY_college_m_Niagara.html', 'https://www.tfrrs.org/teams/LA_college_m_Nicholls_State.html', 'https://www.tfrrs.org/teams/VA_college_m_Norfolk_State.html', 'https://www.tfrrs.org/teams/AL_college_m_North_Alabama.html', 'https://www.tfrrs.org/teams/NC_college_m_North_Carolina.html', 'https://www.tfrrs.org/teams/ND_college_m_North_Dakota.html', 'https://www.tfrrs.org/teams/ND_college_m_North_Dakota_St.html', 'https://www.tfrrs.org/teams/FL_college_m_North_Florida.html', 'https://www.tfrrs.org/teams/TX_college_m_North_Texas.html', 'https://www.tfrrs.org/teams/MA_college_m_Northeastern.html', 'https://www.tfrrs.org/teams/AZ_college_m_Northern_Arizona.html', 'https://www.tfrrs.org/teams/CO_college_m_Northern_Colorado.html', 'https://www.tfrrs.org/teams/IA_college_m_Northern_Iowa.html', 'https://www.tfrrs.org/teams/KY_college_m_Northern_Kentucky.html', 'https://www.tfrrs.org/teams/LA_college_m_Northwestern_St.html', 'https://www.tfrrs.org/teams/IN_college_m_Notre_Dame_IN.html', 'https://www.tfrrs.org/teams/MI_college_m_Oakland.html', 'https://www.tfrrs.org/teams/OH_college_m_Ohio_U.html', 'https://www.tfrrs.org/teams/OH_college_m_Ohio_State.html', 'https://www.tfrrs.org/teams/OK_college_m_Oklahoma.html', 'https://www.tfrrs.org/teams/OK_college_m_Oklahoma_State.html', 'https://www.tfrrs.org/teams/MS_college_m_Mississippi.html', 'https://www.tfrrs.org/teams/OK_college_m_Oral_Roberts.html', 'https://www.tfrrs.org/teams/OR_college_m_Oregon.html', 'https://www.tfrrs.org/teams/OR_college_m_Oregon_State.html', 'https://www.tfrrs.org/teams/CA_college_m_Pacific_CA.html', 'https://www.tfrrs.org/teams/PA_college_m_Penn.html', 'https://www.tfrrs.org/teams/PA_college_m_Penn_State.html', 'https://www.tfrrs.org/teams/CA_college_m_Pepperdine.html', 'https://www.tfrrs.org/teams/PA_college_m_Pittsburgh.html', 'https://www.tfrrs.org/teams/OR_college_m_Portland.html', 'https://www.tfrrs.org/teams/OR_college_m_Portland_State.html', 'https://www.tfrrs.org/teams/TX_college_m_Prairie_View.html', 'https://www.tfrrs.org/teams/SC_college_m_Presbyterian.html', 'https://www.tfrrs.org/teams/NJ_college_m_Princeton.html', 'https://www.tfrrs.org/teams/RI_college_m_Providence.html', 'https://www.tfrrs.org/teams/IN_college_m_Purdue.html', 'https://www.tfrrs.org/teams/IN_college_m_PFW.html', 'https://www.tfrrs.org/teams/CT_college_m_Quinnipiac.html', 'https://www.tfrrs.org/teams/VA_college_m_Radford.html', 'https://www.tfrrs.org/teams/RI_college_m_Rhode_Island.html', 'https://www.tfrrs.org/teams/TX_college_m_Rice.html', 'https://www.tfrrs.org/teams/VA_college_m_Richmond.html', 'https://www.tfrrs.org/teams/NJ_college_m_Rider.html', 'https://www.tfrrs.org/teams/PA_college_m_Robert_Morris_PA.html', 'https://www.tfrrs.org/teams/NJ_college_m_Rutgers.html', 'https://www.tfrrs.org/teams/LA_college_m_SE_Louisiana.html', 'https://www.tfrrs.org/teams/MO_college_m_SE_Missouri.html', 'https://www.tfrrs.org/teams/IL_college_m_SIU_Edwardsville.html', 'https://www.tfrrs.org/teams/TX_college_m_SMU.html', 'https://www.tfrrs.org/teams/CA_college_m_Sacramento_St.html', 'https://www.tfrrs.org/teams/CT_college_m_Sacred_Heart.html', 'https://www.tfrrs.org/teams/PA_college_m_St_Francis_PA.html', 'https://www.tfrrs.org/teams/MO_college_m_St_Louis_U.html', 'https://www.tfrrs.org/teams/TX_college_m_Sam_Houston.html', 'https://www.tfrrs.org/teams/AL_college_m_Samford.html', 'https://www.tfrrs.org/teams/CA_college_m_San_Diego.html', 'https://www.tfrrs.org/teams/CA_college_m_San_Diego_St.html', 'https://www.tfrrs.org/teams/CA_college_m_San_Francisco.html', 'https://www.tfrrs.org/teams/CA_college_m_San_Jose_St.html', 'https://www.tfrrs.org/teams/CA_college_m_Santa_Clara.html', 'https://www.tfrrs.org/teams/WA_college_m_Seattle_U.html', 'https://www.tfrrs.org/teams/NJ_college_m_Seton_Hall.html', 'https://www.tfrrs.org/teams/NY_college_m_Siena.html', 'https://www.tfrrs.org/teams/AL_college_m_South_Alabama.html', 'https://www.tfrrs.org/teams/SC_college_m_South_Carolina.html', 'https://www.tfrrs.org/teams/SC_college_m_South_Carolina_St.html', 'https://www.tfrrs.org/teams/SD_college_m_South_Dakota.html', 'https://www.tfrrs.org/teams/SD_college_m_South_Dakota_St.html', 'https://www.tfrrs.org/teams/FL_college_m_South_Florida.html', 'https://www.tfrrs.org/teams/LA_college_m_Southern.html', 'https://www.tfrrs.org/teams/IL_college_m_Southern_Illinois.html', 'https://www.tfrrs.org/teams/MS_college_m_Southern_Miss.html', 'https://www.tfrrs.org/teams/UT_college_m_Southern_Utah.html', 'https://www.tfrrs.org/teams/NY_college_m_St_Bonaventure.html', 'https://www.tfrrs.org/teams/NY_college_m_St_Francis_NY.html', 'https://www.tfrrs.org/teams/PA_college_m_St_Josephs_PA.html"     >St. Joseph', 'https://www.tfrrs.org/teams/CA_college_m_St_Marys_CA.html"     >St. Mary', 'https://www.tfrrs.org/teams/NJ_college_m_St_Peters.html"     >St. Peter', 'https://www.tfrrs.org/teams/CA_college_m_Stanford.html', 'https://www.tfrrs.org/teams/TX_college_m_Stephen_F_Austin.html', 'https://www.tfrrs.org/teams/FL_college_m_Stetson.html', 'https://www.tfrrs.org/teams/NY_college_m_Stony_Brook.html', 'https://www.tfrrs.org/teams/NY_college_m_Syracuse.html', 'https://www.tfrrs.org/teams/TX_college_m_TCU.html', 'https://www.tfrrs.org/teams/TX_college_m_Tarleton_State.html', 'https://www.tfrrs.org/teams/PA_college_m_Temple.html', 'https://www.tfrrs.org/teams/TN_college_m_Tennessee.html', 'https://www.tfrrs.org/teams/TN_college_m_Tennessee_St.html', 'https://www.tfrrs.org/teams/TN_college_m_Tennessee_Tech.html', 'https://www.tfrrs.org/teams/TN_college_m_Tennessee_Martin.html', 'https://www.tfrrs.org/teams/TX_college_m_Texas.html', 'https://www.tfrrs.org/teams/TX_college_m_Texas_AM.html', 'https://www.tfrrs.org/teams/TX_college_m_Texas_AM_CC.html', 'https://www.tfrrs.org/teams/xc/TX_college_m_TCU.html', 'https://www.tfrrs.org/teams/TX_college_m_Texas_Southern.html', 'https://www.tfrrs.org/teams/TX_college_m_Texas_State.html', 'https://www.tfrrs.org/teams/TX_college_m_Texas_Tech.html', 'https://www.tfrrs.org/teams/OH_college_m_Toledo.html', 'https://www.tfrrs.org/teams/MD_college_m_Towson.html', 'https://www.tfrrs.org/teams/AL_college_m_Troy.html', 'https://www.tfrrs.org/teams/LA_college_m_Tulane.html', 'https://www.tfrrs.org/teams/OK_college_m_Tulsa.html', 'https://www.tfrrs.org/teams/xc/BC_college_m_U_of_Victoria.html', 'https://www.tfrrs.org/teams/AL_college_m_UAB.html', 'https://www.tfrrs.org/teams/CA_college_m_UC_Davis.html', 'https://www.tfrrs.org/teams/CA_college_m_UC_Irvine.html', 'https://www.tfrrs.org/teams/CA_college_m_UC_Riverside.html', 'https://www.tfrrs.org/teams/CA_college_m_UC_San_Diego.html', 'https://www.tfrrs.org/teams/CA_college_m_UC_Santa_Barbara.html', 'https://www.tfrrs.org/teams/FL_college_m_Central_Florida.html', 'https://www.tfrrs.org/teams/CA_college_m_UCLA.html', 'https://www.tfrrs.org/teams/LA_college_m_UL_Lafayette.html', 'https://www.tfrrs.org/teams/LA_college_m_UL_Monroe.html', 'https://www.tfrrs.org/teams/MD_college_m_UMBC.html', 'https://www.tfrrs.org/teams/MA_college_m_UMass_Amherst.html', 'https://www.tfrrs.org/teams/MA_college_m_UMass_Lowell.html', 'https://www.tfrrs.org/teams/NC_college_m_UNC_Asheville.html', 'https://www.tfrrs.org/teams/NC_college_m_UNC_Greensboro.html', 'https://www.tfrrs.org/teams/NC_college_m_UNC_Wilmington.html', 'https://www.tfrrs.org/teams/CA_college_m_USC.html', 'https://www.tfrrs.org/teams/SC_college_m_USC_Upstate.html', 'https://www.tfrrs.org/teams/TX_college_m_Texas_Arlington.html', 'https://www.tfrrs.org/teams/TN_college_m_Chattanooga.html', 'https://www.tfrrs.org/teams/TX_college_m_Texas_Pan_American.html', 'https://www.tfrrs.org/teams/TX_college_m_UTEP.html', 'https://www.tfrrs.org/teams/TX_college_m_UTSA.html', 'https://www.tfrrs.org/teams/UT_college_m_Utah.html', 'https://www.tfrrs.org/teams/UT_college_m_Utah_State.html', 'https://www.tfrrs.org/teams/UT_college_m_Utah_Valley.html', 'https://www.tfrrs.org/teams/VA_college_m_VCU.html', 'https://www.tfrrs.org/teams/VA_college_m_Va_Military_Institute.html', 'https://www.tfrrs.org/teams/IN_college_m_Valparaiso.html', 'https://www.tfrrs.org/teams/TN_college_m_Vanderbilt.html', 'https://www.tfrrs.org/teams/VT_college_m_Vermont.html', 'https://www.tfrrs.org/teams/PA_college_m_Villanova.html', 'https://www.tfrrs.org/teams/VA_college_m_Virginia.html', 'https://www.tfrrs.org/teams/VA_college_m_Virginia_Tech.html', 'https://www.tfrrs.org/teams/NY_college_m_Wagner.html', 'https://www.tfrrs.org/teams/NC_college_m_Wake_Forest.html', 'https://www.tfrrs.org/teams/WA_college_m_Washington.html', 'https://www.tfrrs.org/teams/WA_college_m_Washington_St.html', 'https://www.tfrrs.org/teams/UT_college_m_Weber_State.html', 'https://www.tfrrs.org/teams/xc/WV_college_m_West_Virginia.html', 'https://www.tfrrs.org/teams/NC_college_m_Western_Carolina.html', 'https://www.tfrrs.org/teams/IL_college_m_Western_Illinois.html', 'https://www.tfrrs.org/teams/KY_college_m_Western_Kentucky.html', 'https://www.tfrrs.org/teams/MI_college_m_Western_Michigan.html', 'https://www.tfrrs.org/teams/KS_college_m_Wichita_State.html', 'https://www.tfrrs.org/teams/VA_college_m_William__Mary.html', 'https://www.tfrrs.org/teams/SC_college_m_Winthrop.html', 'https://www.tfrrs.org/teams/WI_college_m_Wis_Green_Bay.html', 'https://www.tfrrs.org/teams/WI_college_m_Wisconsin.html', 'https://www.tfrrs.org/teams/SC_college_m_Wofford.html', 'https://www.tfrrs.org/teams/OH_college_m_Wright_State.html', 'https://www.tfrrs.org/teams/WY_college_m_Wyoming.html', 'https://www.tfrrs.org/teams/OH_college_m_Xavier.html', 'https://www.tfrrs.org/teams/CT_college_m_Yale.html', 'https://www.tfrrs.org/teams/OH_college_m_Youngstown_St.html'];
 
-  Widget _buildRow(String team) {
-    final alreadySaved = _saved.contains(team);
-    return ListTile(
-      title: Text(
-        team,
-        style: _biggerFont,
-      ),
-      trailing: Icon(
-        alreadySaved ? Icons.favorite : Icons.favorite_border,
-        color: alreadySaved ? Colors.red : null,
-      ),
-      onTap: () {
-        setState(() {
-          if (alreadySaved) {
-            _saved.remove(team);
-          } else {
-            _saved.add(team);
-          }
-        });
-      },
-    );
-  }
-
-  void _pushSaved() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          final tiles = _saved.map(
-            (String team) {
-              return ListTile(
-                title: Text(
-                  team,
-                  style: _biggerFont,
-                ),
-              );
-            },
-          );
-          final divided = ListTile.divideTiles(
-            context: context,
-            tiles: tiles,
-          ).toList();
-
-          return Scaffold(
-            appBar: AppBar(
-              title: Text("Teams You're Following"),
-            ),
-            body: ListView(children: divided),
-          );
-        }, // ...to here.
-      ),
-    );
-  }
-  
   @override
   Widget build(BuildContext context) {
+    final applicationBloc = Provider.of<ApplicationBloc>(context);
+
+    void subscribeToTeam(teamName) {
+      print(teamName);
+      var index = allMaleTeams.indexOf(teamName);
+      print(index);
+      var link = allMaleLinks[index];
+      print('$link THis is the link');
+      applicationBloc.getTeam(link);
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('NCAA D1 Teams'),
+        title: Text('Team Selector'),
         backgroundColor: Theme.of(context).primaryColor,
-        actions: [
-          IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
-        ],
       ),
-      body: _buildSuggestions(),
-    );
+        body: AutoCompleteTextField(
+          style: new TextStyle(color: Colors.black, fontSize: 16.0),
+          decoration: new InputDecoration(
+          suffixIcon: Container(
+          width: 85.0,
+          height: 60.0,
+          ),
+        contentPadding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 20.0),
+        filled: true,
+        hintText: 'Search Male Teams',
+        hintStyle: TextStyle(color: Colors.black)),
+        key: key,
+        submitOnSuggestionTap: false,
+        textSubmitted: (text) => {
+            subscribeToTeam(text),
+            print('$text TAPPED')
+        }
+        ,
+        itemFilter: (item, query) {
+          return item
+              .toLowerCase()
+              .startsWith(query.toLowerCase());
+
+
+        },
+        itemSorter: (a, b) {
+          return a.compareTo(b);
+        },
+        suggestions: allMaleTeams,
+        itemBuilder: (context, item) {
+            print(item);
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(item,
+                style: TextStyle(
+                    fontSize: 16.0
+                ),),
+              Padding(
+                padding: EdgeInsets.all(15.0),
+              )
+            ],
+          );
+        },
+        )
+            );
+
   }
 }

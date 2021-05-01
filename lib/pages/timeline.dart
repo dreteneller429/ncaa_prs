@@ -77,7 +77,7 @@ class _TimelineState extends State<Timeline> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Favorite Teams'),
+        title: Text('Followed Teams - Viewing $currentEvent'),
         backgroundColor: Theme.of(context).primaryColor,
         actions: [
           IconButton(

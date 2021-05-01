@@ -28,6 +28,10 @@ dependencies:
   flutter_svg: ^0.22.0
   cached_network_image: ^3.0.0
   provider: ^4.3.3
+  flutter_typeahead: ^3.1.1
+  searchfield: ^0.5.2
+  autocomplete_textfield: ^1.7.3
+
 
 
   # The following adds the Cupertino Icons font to your application.

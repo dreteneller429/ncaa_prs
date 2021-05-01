@@ -37,6 +37,13 @@
             </list>
           </value>
         </entry>
+        <entry key="autocomplete_textfield">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/autocomplete_textfield-1.7.3/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="boolean_selector">
           <value>
             <list>
@@ -191,6 +198,27 @@
             </list>
           </value>
         </entry>
+        <entry key="flutter_keyboard_visibility">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_keyboard_visibility-5.0.1/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="flutter_keyboard_visibility_platform_interface">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_keyboard_visibility_platform_interface-2.0.0/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="flutter_keyboard_visibility_web">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_keyboard_visibility_web-2.0.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="flutter_svg">
           <value>
             <list>
@@ -202,6 +230,20 @@
           <value>
             <list>
               <option value="$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/packages/flutter_test/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="flutter_typeahead">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_typeahead-3.1.1/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="flutter_web_plugins">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/packages/flutter_web_plugins/lib" />
             </list>
           </value>
         </entry>
@@ -244,6 +286,13 @@
           <value>
             <list>
               <option value="$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/packages/integration_test/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="js">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/lib" />
             </list>
           </value>
         </entry>
@@ -422,6 +471,13 @@
             </list>
           </value>
         </entry>
+        <entry key="searchfield">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/searchfield-0.5.2/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="sky_engine">
           <value>
             <list>
@@ -584,6 +640,7 @@
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.1.2/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.1.0/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.5.0/lib" />
+      <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/autocomplete_textfield-1.7.3/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/build-1.6.2/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/build_config-0.4.7/lib" />
@@ -604,11 +661,16 @@
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/file-6.1.0/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blurhash-0.6.0/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_cache_manager-3.0.1/lib" />
+      <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_keyboard_visibility-5.0.1/lib" />
+      <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_keyboard_visibility_platform_interface-2.0.0/lib" />
+      <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_keyboard_visibility_web-2.0.0/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-0.22.0/lib" />
+      <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_typeahead-3.1.1/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/glob-2.0.1/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.2/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/image-3.0.2/lib" />
+      <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-3.1.1/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/json_serializable-3.5.1/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/logging-1.0.1/lib" />
@@ -634,6 +696,7 @@
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/pub_semver-2.0.0/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/pubspec_parse-0.1.8/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.26.0/lib" />
+      <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/searchfield-0.5.2/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/source_gen-0.9.10+3/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.8.1/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.0+3/lib" />
@@ -659,6 +722,7 @@
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/packages/flutter/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/packages/flutter_driver/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/packages/flutter_test/lib" />
+      <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/packages/flutter_web_plugins/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/packages/fuchsia_remote_debug_protocol/lib" />
       <root url="file://$PROJECT_DIR$/../../flutter_windows_1.22.6-stable/flutter/packages/integration_test/lib" />
     </CLASSES>

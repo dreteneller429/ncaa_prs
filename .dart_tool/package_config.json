@@ -32,6 +32,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "autocomplete_textfield",
+      "rootUri": "file:///C:/Users/braed/Desktop/flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/autocomplete_textfield-1.7.3",
+      "packageUri": "lib/",
+      "languageVersion": "1.19"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///C:/Users/braed/Desktop/flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0",
       "packageUri": "lib/",
@@ -164,6 +170,24 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_keyboard_visibility",
+      "rootUri": "file:///C:/Users/braed/Desktop/flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_keyboard_visibility-5.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_keyboard_visibility_platform_interface",
+      "rootUri": "file:///C:/Users/braed/Desktop/flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_keyboard_visibility_platform_interface-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_keyboard_visibility_web",
+      "rootUri": "file:///C:/Users/braed/Desktop/flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_keyboard_visibility_web-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_svg",
       "rootUri": "file:///C:/Users/braed/Desktop/flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-0.22.0",
       "packageUri": "lib/",
@@ -172,6 +196,18 @@
     {
       "name": "flutter_test",
       "rootUri": "file:///C:/Users/braed/Desktop/flutter_windows_1.22.6-stable/flutter/packages/flutter_test",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_typeahead",
+      "rootUri": "file:///C:/Users/braed/Desktop/flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_typeahead-3.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_web_plugins",
+      "rootUri": "file:///C:/Users/braed/Desktop/flutter_windows_1.22.6-stable/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -208,6 +244,12 @@
     {
       "name": "integration_test",
       "rootUri": "file:///C:/Users/braed/Desktop/flutter_windows_1.22.6-stable/flutter/packages/integration_test",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "js",
+      "rootUri": "file:///C:/Users/braed/Desktop/flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -362,6 +404,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "searchfield",
+      "rootUri": "file:///C:/Users/braed/Desktop/flutter_windows_1.22.6-stable/flutter/.pub-cache/hosted/pub.dartlang.org/searchfield-0.5.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///C:/Users/braed/Desktop/flutter_windows_1.22.6-stable/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -500,7 +548,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-04-30T02:43:16.039357Z",
+  "generated": "2021-04-30T22:08:32.526632Z",
   "generator": "pub",
   "generatorVersion": "2.14.0-18.0.dev"
 }
